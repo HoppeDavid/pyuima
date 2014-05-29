@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['runfeaturepipeline',['runFeaturePipeline',['../classnltk-uima_1_1Pipeline_1_1FeaturePipeline.html#aa424b6ac588d035d5350915c8664b2b8',1,'nltk-uima::Pipeline::FeaturePipeline']]]
+  ['runfeaturepipeline',['runFeaturePipeline',['../classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#a34f80ed11b504dae5cd6ceb3b22fe608',1,'modules::pyuima::Pipeline::FeaturePipeline']]]
 ];

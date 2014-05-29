@@ -1,14 +1,12 @@
 """@file DocumentFeatures.py
 
-
-Documentation for this module.
-
-@package func
-  Module docs
-
-More details.
+The module Document Features contains a set of configurable classes that
+generate features from a single documentCas structure. Each class is given a set
+of parameters in the constructor.  
 """
 
+import nltk
+import numpy as np
 
 def featMeanSentsLength(fileid, corpus, stopwords, **kwargs):
     '''This is blub
@@ -20,7 +18,7 @@ def featMeanSentsLength(fileid, corpus, stopwords, **kwargs):
     '''
     features = {}
     doc = corpus.sents(fileids=fileid)
-    return {'MeanSentsLength': mean([len(s) for s in doc])}
+    return {'MeanSentsLength':np.mean([len(s) for s in doc])}
 
 
 def featMeanWordLength(fileid, corpus, stopwords, **kwargs):
@@ -28,7 +26,7 @@ def featMeanWordLength(fileid, corpus, stopwords, **kwargs):
     '''
     features = {}
     doc = corpus.words(fileids=fileid)
-    return {'MeanWordLength': mean([len(w) for w in doc])}
+    return {'MeanWordLength': np.mean([len(w) for w in doc])}
 
 
 def featNumberOfStopwords(fileid, corpus, stopwords, **kwargs):
@@ -50,10 +48,21 @@ def featureFrequentWords(fileid, corpus, frequentWords = [], **kwargs):
         features['contains (%s)', word] = (word in document_words)
     return features
 
-def featureTextLength(fileid, corpus, **kwargs):
-    '''
-    '''
-    features = {}
-    doc = corpus.words(fileids=fileid)
-    features['textLength'] = len(doc)
-    return features
+
+class FeatureTextLength:
+    ''' Computes the number of tokens of a given text'''
+
+    def __init__(self, inputRawTextLabel = "raw", 
+                 outputLabel = "FeatureTextLength"):
+        ''' Constructor
+
+        @param inputRawText = "raw"
+        @param outputLabel = "FeatureTextLength"
+        '''
+        self.inputRawTextLabel = inputRawTextLabel
+        self.outputLabel = outputLabel
+
+    def process(self, features, **kwargs):
+        '''
+        '''
+        features.update({self.outputLabel: len(kwargs[self.inputRawTextLabel])})

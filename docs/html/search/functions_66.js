@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['featmeansentslength',['featMeanSentsLength',['../namespacenltk-uima_1_1DocumentFeatures.html#adb6268a01a74b23106bcc2d604bd8598',1,'nltk-uima::DocumentFeatures']]],
-  ['featmeanwordlength',['featMeanWordLength',['../namespacenltk-uima_1_1DocumentFeatures.html#a7ad1c076c4ecea6948355f29cd2632f9',1,'nltk-uima::DocumentFeatures']]],
-  ['featnumberofstopwords',['featNumberOfStopwords',['../namespacenltk-uima_1_1DocumentFeatures.html#ace62ae629a56cc108c8335e6c603d5c0',1,'nltk-uima::DocumentFeatures']]],
-  ['featurefrequentwords',['featureFrequentWords',['../namespacenltk-uima_1_1DocumentFeatures.html#a6d3500f4cb5ddb2daa5129bc7d9d0b5e',1,'nltk-uima::DocumentFeatures']]],
-  ['featuretextlength',['featureTextLength',['../namespacenltk-uima_1_1DocumentFeatures.html#afa151a75be04fcb94f9882e09bcb6e8c',1,'nltk-uima::DocumentFeatures']]]
+  ['featmeansentslength',['featMeanSentsLength',['../namespacemodules_1_1pyuima_1_1DocumentFeatures.html#af5f2610801ab7760d9099e13cfa300e6',1,'modules::pyuima::DocumentFeatures']]],
+  ['featmeanwordlength',['featMeanWordLength',['../namespacemodules_1_1pyuima_1_1DocumentFeatures.html#a3f81c083cff0af74e8514a7af135be90',1,'modules::pyuima::DocumentFeatures']]],
+  ['featnumberofstopwords',['featNumberOfStopwords',['../namespacemodules_1_1pyuima_1_1DocumentFeatures.html#a26f6ff2dd88a1aa45e132ab1edfabfa6',1,'modules::pyuima::DocumentFeatures']]],
+  ['featurefrequentwords',['featureFrequentWords',['../namespacemodules_1_1pyuima_1_1DocumentFeatures.html#a13ef885f42536094d9a839760ae08473',1,'modules::pyuima::DocumentFeatures']]],
+  ['featuretextlength',['featureTextLength',['../namespacemodules_1_1pyuima_1_1DocumentFeatures.html#af14799a7d9280a8678f025c0a543924d',1,'modules::pyuima::DocumentFeatures']]]
 ];

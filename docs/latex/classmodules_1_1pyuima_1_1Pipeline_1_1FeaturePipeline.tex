@@ -1,0 +1,155 @@
+\hypertarget{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline}{\section{modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline \-Class \-Reference}
+\label{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline}\index{modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline@{modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline}}
+}
+
+
+\-Basic text processing pipeline.  
+
+
+\subsection*{\-Public \-Member \-Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a541bbacc712ff22084c643522614767d}{\-\_\-\-\_\-init\-\_\-\-\_\-}
+\begin{DoxyCompactList}\small\item\em \-Initialize the pipeline by specifying the underlying data. \end{DoxyCompactList}\item 
+def \hyperlink{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a7974a8ffdebf9ccb76621e1485a5ebeb}{init\-Corpus\-Process}
+\begin{DoxyCompactList}\small\item\em \-Initialize corpus functions. \end{DoxyCompactList}\item 
+def \hyperlink{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a2512771e9c094636e7bd4416d2154204}{init\-Document\-Process}
+\begin{DoxyCompactList}\small\item\em \-Initialize document functions. \end{DoxyCompactList}\item 
+def \hyperlink{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a34f80ed11b504dae5cd6ceb3b22fe608}{run\-Feature\-Pipeline}
+\begin{DoxyCompactList}\small\item\em \-Runs the pipeline for feature extraction. \end{DoxyCompactList}\item 
+def \hyperlink{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_ac66ec60bd9e53c6ae02f579bd1adb4fe}{get\-Res\-Df}
+\begin{DoxyCompactList}\small\item\em \-Returns the results of the pipeline as a pandas \-Data\-Frame. \end{DoxyCompactList}\item 
+def \hyperlink{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a1a843ccb1d7f3417e8227a4221f92fc5}{get\-Res\-Cl}
+\begin{DoxyCompactList}\small\item\em \-Returns the results of the pipeline for classification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{\-Detailed \-Description}
+\-Basic text processing pipeline. 
+
+\begin{DoxyRefDesc}{\-Todo}
+\item[\hyperlink{todo__todo000002}{\-Todo}]add check function for pipeline 
+
+change 'fileids' to a flexible parameter \end{DoxyRefDesc}
+\-This class implements a rudimentary \-U\-I\-M\-A pipeline. \-The set-\/up comprises three steps\-: \-First, a text corpus is initialized. \-In addition, optional annotations can be specified through a pandas \-Data\-Frame. \-Second, functions that make use of the whole corpus are set. \-Third, functions that extract certain features are given. \-Finally, the pipeline can be run. \-The results can be obtained by several functions according to the preferred format. \begin{DoxyRefDesc}{\-Todo}
+\item[\hyperlink{todo__todo000003}{\-Todo}]split corpus to training, test, evaluation \end{DoxyRefDesc}
+
+
+\subsection{\-Constructor \& \-Destructor \-Documentation}
+\hypertarget{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a541bbacc712ff22084c643522614767d}{\index{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}!\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}}
+\index{\-\_\-\-\_\-init\-\_\-\-\_\-@{\-\_\-\-\_\-init\-\_\-\-\_\-}!modules::pyuima::Pipeline::FeaturePipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}}
+\subsubsection[{\-\_\-\-\_\-init\-\_\-\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline.\-\_\-\-\_\-init\-\_\-\-\_\-} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{corpus, }
+\item[{}]{data = {\ttfamily ''}}
+\end{DoxyParamCaption}
+)}}\label{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a541bbacc712ff22084c643522614767d}
+
+
+\-Initialize the pipeline by specifying the underlying data. 
+
+
+\begin{DoxyParams}{\-Parameters}
+{\em corpus} & a nltk corpus. \-Can be read in through one of the \-Corpus\-Readers \\
+\hline
+{\em data} & an optional pandas \-Data\-Frame containing additional information about the documents in the corpus. \-If provided, a column named 'fileids' has to be included. \-The column must contain a mapping to the fileids in the corpus. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{\-Member \-Function \-Documentation}
+\hypertarget{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a1a843ccb1d7f3417e8227a4221f92fc5}{\index{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}!get\-Res\-Cl@{get\-Res\-Cl}}
+\index{get\-Res\-Cl@{get\-Res\-Cl}!modules::pyuima::Pipeline::FeaturePipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}}
+\subsubsection[{get\-Res\-Cl}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline.\-get\-Res\-Cl} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{res\-Col = {\ttfamily ''}}
+\end{DoxyParamCaption}
+)}}\label{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a1a843ccb1d7f3417e8227a4221f92fc5}
+
+
+\-Returns the results of the pipeline for classification. 
+
+\-The format of the data returned by this functions is compatable with the nltk functions for classification. \-It is a list of tuples containing two entries\-: a dict containing the features as key value pairs and a string or a numeric label used for classfication or other statistical tasks. 
+\begin{DoxyParams}{\-Parameters}
+{\em res\-Col} & name of a column, whose values should be used as labels for classification. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{\-Return values}
+{\em returns} & the data suitable for the classification functions in nltk. \mbox{[}(\{\},\-\_\-), ...\mbox{]}. \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_ac66ec60bd9e53c6ae02f579bd1adb4fe}{\index{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}!get\-Res\-Df@{get\-Res\-Df}}
+\index{get\-Res\-Df@{get\-Res\-Df}!modules::pyuima::Pipeline::FeaturePipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}}
+\subsubsection[{get\-Res\-Df}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline.\-get\-Res\-Df} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{res\-Cols = {\ttfamily \mbox{[}\mbox{]}}}
+\end{DoxyParamCaption}
+)}}\label{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_ac66ec60bd9e53c6ae02f579bd1adb4fe}
+
+
+\-Returns the results of the pipeline as a pandas \-Data\-Frame. 
+
+a list of column names from the additional data (default \mbox{[}\mbox{]}). \-If no additional data was specified in the constructor, only the features are returned as a dataframe 
+\begin{DoxyRetVals}{\-Return values}
+{\em returns} & the data as a pandas \-Data\-Frame \\
+\hline
+\end{DoxyRetVals}
+\hypertarget{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a7974a8ffdebf9ccb76621e1485a5ebeb}{\index{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}!init\-Corpus\-Process@{init\-Corpus\-Process}}
+\index{init\-Corpus\-Process@{init\-Corpus\-Process}!modules::pyuima::Pipeline::FeaturePipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}}
+\subsubsection[{init\-Corpus\-Process}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline.\-init\-Corpus\-Process} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{funs, }
+\item[{}]{args}
+\end{DoxyParamCaption}
+)}}\label{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a7974a8ffdebf9ccb76621e1485a5ebeb}
+
+
+\-Initialize corpus functions. 
+
+\-This function executes a list of functions ($\ast$funs) in the order they are provided in the list. \-Each function is given $\ast$$\ast$args as additional arguments. \-The results are stored in a dictionary inside the class for later use. 
+\begin{DoxyParams}{\-Parameters}
+{\em $\ast$funs} & a list of functions in the following format\-: the first argument is a corpus. \-All other arguments are named arguments, that are provided in $\ast$$\ast$args \\
+\hline
+{\em $\ast$$\ast$args} & list of tuples containing the arguments for the functions listed in $\ast$funs \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a2512771e9c094636e7bd4416d2154204}{\index{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}!init\-Document\-Process@{init\-Document\-Process}}
+\index{init\-Document\-Process@{init\-Document\-Process}!modules::pyuima::Pipeline::FeaturePipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}}
+\subsubsection[{init\-Document\-Process}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline.\-init\-Document\-Process} (
+\begin{DoxyParamCaption}
+\item[{}]{self, }
+\item[{}]{funs, }
+\item[{}]{args}
+\end{DoxyParamCaption}
+)}}\label{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a2512771e9c094636e7bd4416d2154204}
+
+
+\-Initialize document functions. 
+
+\-This function initializes a list of functions to be executed for each document. \-Each function in $\ast$funs returns a feature from the current document. 
+\begin{DoxyParams}{\-Parameters}
+{\em $\ast$funs} & \-List of functions to be executed for each document. \-The functions follow a particular pattern. \\
+\hline
+{\em $\ast$$\ast$args} & \-Additional arguments as named arguments. \-These are given as arguments to each of the functions given in $\ast$funs. \-For example, they can be used to provide parameter values for the feature extractors. \\
+\hline
+\end{DoxyParams}
+\hypertarget{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a34f80ed11b504dae5cd6ceb3b22fe608}{\index{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}!run\-Feature\-Pipeline@{run\-Feature\-Pipeline}}
+\index{run\-Feature\-Pipeline@{run\-Feature\-Pipeline}!modules::pyuima::Pipeline::FeaturePipeline@{modules\-::pyuima\-::\-Pipeline\-::\-Feature\-Pipeline}}
+\subsubsection[{run\-Feature\-Pipeline}]{\setlength{\rightskip}{0pt plus 5cm}def {\bf modules.\-pyuima.\-Pipeline.\-Feature\-Pipeline.\-run\-Feature\-Pipeline} (
+\begin{DoxyParamCaption}
+\item[{}]{self}
+\end{DoxyParamCaption}
+)}}\label{classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline_a34f80ed11b504dae5cd6ceb3b22fe608}
+
+
+\-Runs the pipeline for feature extraction. 
+
+\-All functions provide in the earlier steps of the set-\/up are executed. \-The named arguments specyfied are given as parameters for the function when executed. \-As a result, the features are computed as a list of tuples. \-Each entry of the list contains the features for a single document of the corpus. \-The results can be assessed by several functions. 
+
+\-The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+\hyperlink{Pipeline_8py}{\-Pipeline.\-py}\end{DoxyCompactItemize}
