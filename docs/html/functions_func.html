@@ -80,28 +80,43 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="functions.html"><span>All</span></a></li>
       <li class="current"><a href="functions_func.html"><span>Functions</span></a></li>
+      <li><a href="functions_vars.html"><span>Variables</span></a></li>
     </ul>
   </div>
 </div>
 <div class="contents">
 &#160;<ul>
 <li>__init__()
-: <a class="el" href="classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#a541bbacc712ff22084c643522614767d">modules.pyuima.Pipeline.FeaturePipeline</a>
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#aaa22060bec72814d9a17a2556e018099">modules.pyuima.Base.Pipeline</a>
+, <a class="el" href="classmodules_1_1pyuima_1_1FeatureExtractors_1_1DocumentLength.html#ad2729bc7fd6da020dd7437b96930f876">modules.pyuima.FeatureExtractors.DocumentLength</a>
+, <a class="el" href="classmodules_1_1pyuima_1_1DocumentAnnotators_1_1WordTokenize.html#a5561d74c64545ba6ee0b10d62ad5ba8c">modules.pyuima.DocumentAnnotators.WordTokenize</a>
+, <a class="el" href="classmodules_1_1pyuima_1_1CorpusAnnotators_1_1FrequentWords.html#abdb79715505ac7826bc031b2651f30bc">modules.pyuima.CorpusAnnotators.FrequentWords</a>
 </li>
 <li>getResCl()
-: <a class="el" href="classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#a1a843ccb1d7f3417e8227a4221f92fc5">modules.pyuima.Pipeline.FeaturePipeline</a>
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a3055328fdaf274c2d70071e3c99975a1">modules.pyuima.Base.Pipeline</a>
 </li>
 <li>getResDf()
-: <a class="el" href="classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#ac66ec60bd9e53c6ae02f579bd1adb4fe">modules.pyuima.Pipeline.FeaturePipeline</a>
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a1ec1453844e5c3c7035773d87e66fc52">modules.pyuima.Base.Pipeline</a>
 </li>
-<li>initCorpusProcess()
-: <a class="el" href="classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#a7974a8ffdebf9ccb76621e1485a5ebeb">modules.pyuima.Pipeline.FeaturePipeline</a>
+<li>initCorpusAnnotators()
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a72a014a454b8a9069e688a465b55ebc6">modules.pyuima.Base.Pipeline</a>
 </li>
-<li>initDocumentProcess()
-: <a class="el" href="classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#a2512771e9c094636e7bd4416d2154204">modules.pyuima.Pipeline.FeaturePipeline</a>
+<li>initDocumentAnnotators()
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a17e3ed2f3fe7ed9d85c10c2206695e54">modules.pyuima.Base.Pipeline</a>
 </li>
-<li>runFeaturePipeline()
-: <a class="el" href="classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#a34f80ed11b504dae5cd6ceb3b22fe608">modules.pyuima.Pipeline.FeaturePipeline</a>
+<li>initFeatureExtractors()
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a7b05c580656e0958176aa0775a0965b4">modules.pyuima.Base.Pipeline</a>
+</li>
+<li>printRes()
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#ab821eccc171b86100501271f7e5fbda1">modules.pyuima.Base.Pipeline</a>
+</li>
+<li>process()
+: <a class="el" href="classmodules_1_1pyuima_1_1FeatureExtractors_1_1DocumentLength.html#af77b99e4e44362b05c564ffc5a1698a0">modules.pyuima.FeatureExtractors.DocumentLength</a>
+, <a class="el" href="classmodules_1_1pyuima_1_1DocumentAnnotators_1_1WordTokenize.html#a81c6b03ebd0011847d1baccd450e1268">modules.pyuima.DocumentAnnotators.WordTokenize</a>
+, <a class="el" href="classmodules_1_1pyuima_1_1CorpusAnnotators_1_1FrequentWords.html#a532e30607ce10dbd4f807b3fa9096ac7">modules.pyuima.CorpusAnnotators.FrequentWords</a>
+</li>
+<li>run()
+: <a class="el" href="classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a3850b7f87e16870cd342615c4a25c7e2">modules.pyuima.Base.Pipeline</a>
 </li>
 </ul>
 </div><!-- contents -->
@@ -110,7 +125,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -122,7 +137,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 27 2014 22:49:36 for pyuima by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 30 2014 14:11:56 for pyuima by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

@@ -49,7 +49,7 @@ def featureFrequentWords(fileid, corpus, frequentWords = [], **kwargs):
     return features
 
 
-class FeatureTextLength:
+class DocumentLength:
     ''' Computes the number of tokens of a given text'''
 
     def __init__(self, inputRawTextLabel = "raw", 

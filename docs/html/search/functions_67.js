@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['getrescl',['getResCl',['../classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#a1a843ccb1d7f3417e8227a4221f92fc5',1,'modules::pyuima::Pipeline::FeaturePipeline']]],
-  ['getresdf',['getResDf',['../classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html#ac66ec60bd9e53c6ae02f579bd1adb4fe',1,'modules::pyuima::Pipeline::FeaturePipeline']]]
+  ['getrescl',['getResCl',['../classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a3055328fdaf274c2d70071e3c99975a1',1,'modules::pyuima::Base::Pipeline']]],
+  ['getresdf',['getResDf',['../classmodules_1_1pyuima_1_1Base_1_1Pipeline.html#a1ec1453844e5c3c7035773d87e66fc52',1,'modules::pyuima::Base::Pipeline']]]
 ];

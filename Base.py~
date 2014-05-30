@@ -1,5 +1,6 @@
 import nltk
 import pandas as pd
+import pprint
 
 '''
 @todo add check function for pipeline
@@ -21,7 +22,7 @@ class Pipeline():
     '''
 
     def __init__(self, corpus, data = '', fileIdLabel = 'fileId',
-                 contentLabel = 'text'):
+                 contentLabel = 'text', corpusFormat = 'nltk'):
         ''' Initialize the pipeline by specifying the underlying data
 
         @param corpus    a nltk corpus. Can be read in through one of the
@@ -37,15 +38,25 @@ class Pipeline():
         self.__corpus = corpus
         self.__data = data
         self.__args = {}
+        self.__corpusFormat = corpusFormat
+
         self.__initCas()
 
     def __initCas(self):
         self.__casDoc = {}
-        for idIter in self.__corpus.fileids():
-            d = {}
-            d[self.__fileIdLabel] = idIter
-            d[self.__contentLabel] = self.__corpus.raw(idIter)
-            self.__casDoc[idIter] = d
+        
+        if self.__corpusFormat == 'nltk':
+            for idIter in self.__corpus.fileids():
+                d = {}
+                d[self.__fileIdLabel] = idIter
+                d[self.__contentLabel] = self.__corpus.raw(idIter)
+                self.__casDoc[idIter] = d
+        elif self.__corpusFormat == 'dict':
+            for k,v in self.__corpus.items():
+                d = {}
+                d[self.__fileIdLabel] = k
+                d[self.__contentLabel] = v
+                self.__casDoc[k] = d
             
         self.__casCorpus = {}
         self.__features = []
@@ -79,6 +90,7 @@ class Pipeline():
         # document features
         for k in self.__casDoc.keys():
             f = {}
+            f[self.__fileIdLabel] = self.__casDoc[k][self.__fileIdLabel]
             pars = {}
             pars.update(self.__casDoc[k])
             pars.update(self.__casCorpus)
@@ -103,7 +115,7 @@ class Pipeline():
         if resCols == 'all':
             resData = self.__data
         elif not len(resCols) == 0:
-            resCols.append('fileids')
+            resCols.append(self.__fileIdLabel)
             resCols = list(set(resCols))
             resData = self.__data[resCols]
         else:
@@ -111,8 +123,8 @@ class Pipeline():
 
 
         if resCols:
-            return pd.merge(resText, resData, left_on='fileids',
-                            right_on='fileids')
+            return pd.merge(resText, resData, left_on= self.__fileIdLabel,
+                            right_on= self.__fileIdLabel)
         else:
             return resText
         
@@ -132,15 +144,29 @@ class Pipeline():
 
         '''
         dd = nltk.defaultdict(str)
-        tmpLabel = zip(self.__data['fileids'].tolist(), self.__data[resCol])
+        tmpLabel = zip(self.__data[self.__fileIdLabel].tolist(), self.__data[resCol])
         for k,v in tmpLabel:
             dd[k] = v
         f = self.__features
         featTupels = []
         for featIter in range(0,len(f)):
-            featTupels.append((f[featIter], dd[f[featIter]['fileids']]))
+            id  = f[featIter][self.__fileIdLabel]
+            tempF = f[featIter].copy()
+            del tempF[self.__fileIdLabel]
+            featTupels.append((tempF, dd[id]))
         return featTupels
     
+    def printRes(self):
+        pprint.pprint( "Data")
+        pprint.pprint( self.__data)
+        pprint.pprint( "CAS")
+        pprint.pprint( self.__casDoc)
+        pprint.pprint( "CAS Corpus")
+        pprint.pprint( self.__casCorpus)
+        pprint.pprint( "Features")
+        pprint.pprint( self.__features)
+        
+
     def __toDataFrame(self, features):
         '''
 

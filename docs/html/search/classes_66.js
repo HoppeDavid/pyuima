@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['featurepipeline',['FeaturePipeline',['../classmodules_1_1pyuima_1_1Pipeline_1_1FeaturePipeline.html',1,'modules::pyuima::Pipeline']]]
+  ['frequentwords',['FrequentWords',['../classmodules_1_1pyuima_1_1CorpusAnnotators_1_1FrequentWords.html',1,'modules::pyuima::CorpusAnnotators']]]
 ];

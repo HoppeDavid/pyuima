@@ -49,6 +49,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
+      <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
@@ -76,23 +77,162 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="textblock"><h2><a class="anchor" id="Introduction"></a>
 Introduction</h2>
-<h2><a class="anchor" id="Overview"></a>
-Overview</h2>
-<h2><a class="anchor" id="Examples"></a>
-Examples</h2>
-<h3><a class="anchor" id=""></a>
-</h3>
-<h3><a class="anchor" id="Extracting"></a>
-Basic Features</h3>
-<h3><a class="anchor" id="Using"></a>
-Corpus Processes</h3>
-<h3><a class="anchor" id="Including"></a>
-Additional Information</h3>
-<h3><a class="anchor" id="Example"></a>
-Gender Classification Using Naive Bayes  (NLTK)</h3>
-<h3><a class="anchor" id="Example"></a>
-Gender Classification Using Naive Bayes  (NLTK)</h3>
-<h2><a class="anchor" id="Issues"></a>
+<p>pyuima offers a simple pipeline for natural language processing. It is designed for text classification.</p>
+<h2><a class="anchor" id="Pipeline"></a>
+Pipeline</h2>
+<p>The general pipeline is as follows:</p>
+<h2><a class="anchor" id="Components"></a>
+Components</h2>
+<h3><a class="anchor" id="DocumentAnnotators"></a>
+DocumentAnnotators</h3>
+<div class="fragment"><pre class="fragment"> <span class="keyword">class </span>WordTokenize:
+     <span class="stringliteral">&#39;&#39;&#39;</span>
+<span class="stringliteral">     &#39;&#39;&#39;</span>
+     <span class="keyword">def </span>__init__(self, rawTextLabel = &#39;text&#39;, outputLabel = &#39;tokens&#39;,
+                  tokenizer = nltk.tokenize.PunktWordTokenizer):
+         <span class="stringliteral">&#39;&#39;&#39;</span>
+<span class="stringliteral">         &#39;&#39;&#39;</span>
+         self.rawTextLabel = rawTextLabel
+         self.outputLabel = outputLabel
+         self.tokenizer = tokenizer
+         
+     <span class="keyword">def </span>process(self, res, **kwargs):
+         tokenize = self.tokenizer()
+         tokens = tokenize.tokenize(kwargs[self.rawTextLabel])
+         res.update({self.outputLabel:tokens})
+</pre></div><h3><a class="anchor" id="CorpusAnnotators"></a>
+CorpusAnnotators</h3>
+<div class="fragment"><pre class="fragment"> <span class="keyword">class </span>FrequentWords:
+ 
+     <span class="keyword">def </span>__init__(self, wordsLabel, stopwords = [], outputLabel = &#39;FrequentWords&#39;,
+                  returnNumber = 50):
+         self.__wordsLabel = wordsLabel
+         self.__outputLabel = outputLabel
+         self.__stopwords = stopwords
+         self.__returnNumber = returnNumber
+     
+     <span class="keyword">def </span>process(self, res, **kwargs):
+         words = kwargs[self.__wordsLabel]
+         listWords = []
+         <span class="keywordflow">for</span> i <span class="keywordflow">in</span> words:
+             [listWords.append(x) <span class="keywordflow">for</span> x <span class="keywordflow">in</span> i]
+         all_words = nltk.FreqDist(w <span class="keywordflow">for</span> w <span class="keywordflow">in</span> listWords 
+                                   <span class="keywordflow">if</span> w <span class="keywordflow">not</span> <span class="keywordflow">in</span> self.__stopwords)
+         frequentWords = all_words.keys()[:self.__returnNumber] 
+         res.update({self.__outputLabel: frequentWords})
+</pre></div><h3><a class="anchor" id="FeatureExtractors"></a>
+FeatureExtractors</h3>
+<div class="fragment"><pre class="fragment"> <span class="keyword">class </span>DocumentLength:
+     <span class="stringliteral">&#39;&#39;&#39; Computes the number of tokens of a given text&#39;&#39;&#39;</span>
+ 
+     <span class="keyword">def </span>__init__(self, inputRawTextLabel = &quot;raw&quot;, 
+                  outputLabel = <span class="stringliteral">&quot;FeatureTextLength&quot;</span>):
+         <span class="stringliteral">&#39;&#39;&#39; Constructor</span>
+<span class="stringliteral"> </span>
+<span class="stringliteral">         @param inputRawText = &quot;raw&quot;</span>
+<span class="stringliteral">         @param outputLabel = &quot;FeatureTextLength&quot;</span>
+<span class="stringliteral">         &#39;&#39;&#39;</span>
+         self.inputRawTextLabel = inputRawTextLabel
+         self.outputLabel = outputLabel
+ 
+     <span class="keyword">def </span>process(self, features, **kwargs):
+         <span class="stringliteral">&#39;&#39;&#39;</span>
+<span class="stringliteral">         &#39;&#39;&#39;</span>
+         features.update({self.outputLabel: len(kwargs[self.inputRawTextLabel])})
+</pre></div><h2><a class="anchor" id="Example"></a>
+Pipeline</h2>
+<div class="fragment"><pre class="fragment"> <span class="comment"># Sample Pipeline</span>
+ 
+ <span class="comment"># loading test texts</span>
+ textData = PlaintextCorpusReader(<span class="stringliteral">&#39;/home/david/Dropbox/Master/Info/master_thesis/nltk/corpora/test/&#39;</span>, 
+                                 <span class="stringliteral">&#39;.*\.txt&#39;</span>,  encoding = <span class="stringliteral">&#39;utf-8&#39;</span>)
+ 
+ textDataDict = {
+ <span class="stringliteral">&#39;file1.txt&#39;</span>: <span class="stringliteral">u&#39;Philipp Lahm hat erneut Probleme mit dem linken Sprunggelenk.&#39;</span>,
+ <span class="stringliteral">&#39;file2.txt&#39;</span>: <span class="stringliteral">u&#39;Ein Volkswagen f\xfcr Kenia, das ist die Vision des Briten Joel Jackson. &#39;</span>,
+ <span class="stringliteral">&#39;file3.txt&#39;</span>: <span class="stringliteral">u&#39;Russland hat mehrere Tausend Soldaten von der Grenze zur Ukraine abgezogen. \n&#39;</span>}
+ 
+ psychData = pd.DataFrame({<span class="stringliteral">&#39;fileId&#39;</span>:[<span class="stringliteral">&#39;file1.txt&#39;</span>, <span class="stringliteral">&#39;file2.txt&#39;</span>, <span class="stringliteral">&#39;file3.txt&#39;</span>], <span class="stringliteral">&#39;geschl&#39;</span>:[<span class="stringliteral">&#39;m&#39;</span>, <span class="stringliteral">&#39;w&#39;</span>, <span class="stringliteral">&#39;m&#39;</span>]})
+ 
+ featPipe = Pipe(textDataDict, psychData, fileIdLabel=<span class="stringliteral">&#39;fileId&#39;</span>, corpusFormat=<span class="stringliteral">&#39;dict&#39;</span>)
+ featPipe.initDocumentAnnotators(dA.WordTokenize(outputLabel=<span class="stringliteral">&#39;tokens&#39;</span>))
+ featPipe.initCorpusAnnotators(cA.FrequentWords(wordsLabel= <span class="stringliteral">&#39;tokens&#39;</span>, returnNumber=5))
+ featPipe.initFeatureExtractors(fE.DocumentLength(inputRawTextLabel= <span class="stringliteral">&#39;tokens&#39;</span>))
+ featPipe.run()
+ featPipe.printRes()
+ 
+ <span class="keywordflow">print</span> <span class="stringliteral">&quot;\nResult Set for Classifier&quot;</span>
+ pprint.pprint(featPipe.getResCl(resCol=<span class="stringliteral">&#39;geschl&#39;</span>))
+ 
+ <span class="keywordflow">print</span> <span class="stringliteral">&quot;\nResult Set as DataFrame&quot;</span>
+ pprint.pprint(featPipe.getResDf(resCols=[<span class="stringliteral">&#39;geschl&#39;</span>]))
+</pre></div><div class="fragment"><pre class="fragment"> <span class="stringliteral">&#39;Data&#39;</span>
+       fileId geschl
+ 0  file1.txt      m
+ 1  file2.txt      w
+ 2  file3.txt      m
+ 
+ [3 rows x 2 columns]
+ <span class="stringliteral">&#39;CAS&#39;</span>
+ {<span class="stringliteral">&#39;file1.txt&#39;</span>: {<span class="stringliteral">&#39;fileId&#39;</span>: <span class="stringliteral">&#39;file1.txt&#39;</span>,
+                <span class="stringliteral">&#39;text&#39;</span>: <span class="stringliteral">u&#39;Philipp Lahm hat erneut Probleme mit dem linken Sprunggelenk.&#39;</span>,
+                <span class="stringliteral">&#39;tokens&#39;</span>: [<span class="stringliteral">u&#39;Philipp&#39;</span>,
+                           <span class="stringliteral">u&#39;Lahm&#39;</span>,
+                           <span class="stringliteral">u&#39;hat&#39;</span>,
+                           <span class="stringliteral">u&#39;erneut&#39;</span>,
+                           <span class="stringliteral">u&#39;Probleme&#39;</span>,
+                           <span class="stringliteral">u&#39;mit&#39;</span>,
+                           <span class="stringliteral">u&#39;dem&#39;</span>,
+                           <span class="stringliteral">u&#39;linken&#39;</span>,
+                           <span class="stringliteral">u&#39;Sprunggelenk.&#39;</span>]},
+  <span class="stringliteral">&#39;file2.txt&#39;</span>: {<span class="stringliteral">&#39;fileId&#39;</span>: <span class="stringliteral">&#39;file2.txt&#39;</span>,
+                <span class="stringliteral">&#39;text&#39;</span>: <span class="stringliteral">u&#39;Ein Volkswagen f\xfcr Kenia, das ist die Vision des Briten Joel Jackson. &#39;</span>,
+                <span class="stringliteral">&#39;tokens&#39;</span>: [<span class="stringliteral">u&#39;Ein&#39;</span>,
+                           <span class="stringliteral">u&#39;Volkswagen&#39;</span>,
+                           <span class="stringliteral">u&#39;f\xfcr&#39;</span>,
+                           <span class="stringliteral">u&#39;Kenia&#39;</span>,
+                           <span class="stringliteral">u&#39;,&#39;</span>,
+                           <span class="stringliteral">u&#39;das&#39;</span>,
+                           <span class="stringliteral">u&#39;ist&#39;</span>,
+                           <span class="stringliteral">u&#39;die&#39;</span>,
+                           <span class="stringliteral">u&#39;Vision&#39;</span>,
+                           <span class="stringliteral">u&#39;des&#39;</span>,
+                           <span class="stringliteral">u&#39;Briten&#39;</span>,
+                           <span class="stringliteral">u&#39;Joel&#39;</span>,
+                           <span class="stringliteral">u&#39;Jackson.&#39;</span>]},
+  <span class="stringliteral">&#39;file3.txt&#39;</span>: {<span class="stringliteral">&#39;fileId&#39;</span>: <span class="stringliteral">&#39;file3.txt&#39;</span>,
+                <span class="stringliteral">&#39;text&#39;</span>: <span class="stringliteral">u&#39;Russland hat mehrere Tausend Soldaten von der Grenze zur Ukraine abgezogen. \n&#39;</span>,
+                <span class="stringliteral">&#39;tokens&#39;</span>: [<span class="stringliteral">u&#39;Russland&#39;</span>,
+                           <span class="stringliteral">u&#39;hat&#39;</span>,
+                           <span class="stringliteral">u&#39;mehrere&#39;</span>,
+                           <span class="stringliteral">u&#39;Tausend&#39;</span>,
+                           <span class="stringliteral">u&#39;Soldaten&#39;</span>,
+                           <span class="stringliteral">u&#39;von&#39;</span>,
+                           <span class="stringliteral">u&#39;der&#39;</span>,
+                           <span class="stringliteral">u&#39;Grenze&#39;</span>,
+                           <span class="stringliteral">u&#39;zur&#39;</span>,
+                           <span class="stringliteral">u&#39;Ukraine&#39;</span>,
+                           <span class="stringliteral">u&#39;abgezogen.&#39;</span>]}}
+ <span class="stringliteral">&#39;CAS Corpus&#39;</span>
+ {<span class="stringliteral">&#39;FrequentWords&#39;</span>: [<span class="stringliteral">u&#39;hat&#39;</span>, <span class="stringliteral">u&#39;,&#39;</span>, <span class="stringliteral">u&#39;Briten&#39;</span>, <span class="stringliteral">u&#39;Ein&#39;</span>, <span class="stringliteral">u&#39;Grenze&#39;</span>]}
+ <span class="stringliteral">&#39;Features&#39;</span>
+ [{<span class="stringliteral">&#39;FeatureTextLength&#39;</span>: 9, <span class="stringliteral">&#39;fileId&#39;</span>: <span class="stringliteral">&#39;file1.txt&#39;</span>},
+  {<span class="stringliteral">&#39;FeatureTextLength&#39;</span>: 11, <span class="stringliteral">&#39;fileId&#39;</span>: <span class="stringliteral">&#39;file3.txt&#39;</span>},
+  {<span class="stringliteral">&#39;FeatureTextLength&#39;</span>: 13, <span class="stringliteral">&#39;fileId&#39;</span>: <span class="stringliteral">&#39;file2.txt&#39;</span>}]
+ 
+ Result Set <span class="keywordflow">for</span> Classifier
+ [({<span class="stringliteral">&#39;FeatureTextLength&#39;</span>: 9}, <span class="stringliteral">&#39;m&#39;</span>),
+  ({<span class="stringliteral">&#39;FeatureTextLength&#39;</span>: 11}, <span class="stringliteral">&#39;m&#39;</span>),
+  ({<span class="stringliteral">&#39;FeatureTextLength&#39;</span>: 13}, <span class="stringliteral">&#39;w&#39;</span>)]
+ 
+ Result Set <span class="keyword">as</span> DataFrame
+    FeatureTextLength     fileId geschl
+ 0                  9  file1.txt      m
+ 1                 11  file3.txt      m
+ 2                 13  file2.txt      w
+ 
+ [3 rows x 3 columns]
+</pre></div><h2><a class="anchor" id="Issues"></a>
 Issues</h2>
 <dl class="author"><dt><b>Author:</b></dt><dd>David Hoppe </dd></dl>
 </div></div><!-- contents -->
@@ -101,7 +241,7 @@ Issues</h2>
      onmouseover="return searchBox.OnSearchSelectShow()"
      onmouseout="return searchBox.OnSearchSelectHide()"
      onkeydown="return searchBox.OnSearchSelectKey(event)">
-<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Functions</a></div>
+<a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(0)"><span class="SelectionMark">&#160;</span>All</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(1)"><span class="SelectionMark">&#160;</span>Classes</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(2)"><span class="SelectionMark">&#160;</span>Namespaces</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(3)"><span class="SelectionMark">&#160;</span>Files</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(4)"><span class="SelectionMark">&#160;</span>Functions</a><a class="SelectItem" href="javascript:void(0)" onclick="searchBox.OnSelectItem(5)"><span class="SelectionMark">&#160;</span>Variables</a></div>
 
 <!-- iframe showing the search results (closed by default) -->
 <div id="MSearchResultsWindow">
@@ -113,7 +253,7 @@ Issues</h2>
 
 
 <hr class="footer"/><address class="footer"><small>
-Generated on Thu May 29 2014 11:45:09 for pyuima by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri May 30 2014 14:11:55 for pyuima by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.7.6.1
 </small></address>

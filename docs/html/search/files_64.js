@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['documentfeatures_2epy',['DocumentFeatures.py',['../DocumentFeatures_8py.html',1,'']]]
+  ['documentannotators_2epy',['DocumentAnnotators.py',['../DocumentAnnotators_8py.html',1,'']]]
 ];

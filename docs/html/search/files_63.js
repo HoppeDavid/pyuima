@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['corpusfeatures_2epy',['CorpusFeatures.py',['../CorpusFeatures_8py.html',1,'']]]
+  ['corpusannotators_2epy',['CorpusAnnotators.py',['../CorpusAnnotators_8py.html',1,'']]]
 ];
